@@ -1,22 +1,22 @@
 <template>
-    <div class="cards">
+    <MainView class="cards">
         <div v-for="card in content.shelters" class="card" onmouseover="showLarge = true" onmouseleave="showLarge = false">
-            <img class="card_image" :src="`/src/assets/shelters/${card.img}`"/>
+            <div class="card_image" ><img :src="`/src/assets/shelters/${card.img}`"/></div>
             <div v-if="!showLarge" class="card_content">
-                <div class="card_title">{{ card.title }}</div>
-                <p class="card_text">
+                <div class="card_content_title">{{ card.title }}</div>
+                <p class="card_content_text">
                     {{ card.text }}
                 </p>
             </div>
             <div v-if="showLarge" class="card_content">
-                <div class="card_title">{{ content.info.title }}</div>
-                <p class="card_text">
+                <div class="card_content_title">{{ content.info.title }}</div>
+                <p class="card_content_text">
                     {{ content.info.text }}
                 </p>
             </div>
-            <button class="btn btn--block card__btn">{{ content.buttons.more }}</button>
+            <button class="card_button">{{ content.buttons.more }}</button>
         </div>
-    </div>
+    </MainView>
 </template>
 
 <script lang="ts">
@@ -24,8 +24,10 @@
     import { useRoute } from 'vue-router'
     import { ref, watch } from 'vue'
     import { useSheltersStore } from '@/store/shelters'
+    import MainView from "@/views/MainView.vue";
 
     export default {
+        components: {MainView},
         setup () {
             const sheltersStore = useSheltersStore()
             const mainStore = useMainStore()
@@ -53,47 +55,47 @@
 
 <style lang="scss" scoped>
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  @include mobile {
+    display: block;
+  }
 }
 
 .card {
-  background-color: white;
+  background-color: $white;
   border-radius: 0.25rem;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
-  &:hover {
-    .card__image {
-      filter: contrast(100%);
-    }
-  }
+  position: relative;
 
   &_image {
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
-      filter: contrast(70%);
-      overflow: hidden;
-      position: relative;
-      transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);;
-      &::before {
-        content: "";
-        display: block;
-        padding-top: 56.25%;
-      }
-      @media(min-width: 40rem) {
-        &::before {
-          padding-top: 66.6%;
+      width: 100%;
+      height: 300px;
+      //position: absolute;
+      //top: 0;
+      //left: 0;
+        & img {
+          width: 100%;
+          height: 100%;
         }
-      }
+  }
+  &_content {
+    padding: 10px;
+    &_title {
+
+    }
+    &_text {
+
+    }
+  }
+  &_button {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 15px;
   }
 }
 </style>
