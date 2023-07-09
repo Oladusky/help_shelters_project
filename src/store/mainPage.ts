@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import {defineStore} from 'pinia'
 
 export const useMainPageStore = defineStore('mainPage', {
     state: () => {
@@ -40,7 +40,7 @@ export const useMainPageStore = defineStore('mainPage', {
                     }
 
                 },
-            }
+            },
         }
     },
     actions: {},
