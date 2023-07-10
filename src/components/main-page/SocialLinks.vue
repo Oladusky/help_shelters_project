@@ -1,7 +1,8 @@
 <template>
-    <MainView class="info">
-        <h2 class="info_title">{{ content.infoBanner.header }}</h2>
-        <p class="info_text">{{ content.infoBanner.text }}</p>
+    <MainView class="social">
+        <h2 class="social_title">{{ content.socialLinks.header }}</h2>
+        <p class="social_text">{{ content.socialLinks.text }}</p>
+        <div class="social_links"></div>
     </MainView>
 </template>
 
@@ -32,16 +33,16 @@
 </script>
 
 <style lang="scss" scoped>
-.info {
-    margin-top: 60px;
-    margin-bottom: 60px;
+.social {
+  margin-top: 60px;
+  margin-bottom: 60px;
   @include mobile {
     margin-top: 20px;
   }
-    &_title {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    &_text {}
+  &_title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &_text {}
 }
 </style>

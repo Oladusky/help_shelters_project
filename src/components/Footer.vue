@@ -1,7 +1,9 @@
 <template>
-    <MainView class="info">
-        <h2 class="info_title">{{ content.infoBanner.header }}</h2>
-        <p class="info_text">{{ content.infoBanner.text }}</p>
+    <MainView>
+        <div class="footer">
+            <!--            <p class="footer_text">{{content.footer}}</p>-->
+            <!--            <p class="footer_text">{{content.footer.line_two}}</p>-->
+        </div>
     </MainView>
 </template>
 
@@ -32,16 +34,12 @@
 </script>
 
 <style lang="scss" scoped>
-.info {
-    margin-top: 60px;
-    margin-bottom: 60px;
-  @include mobile {
-    margin-top: 20px;
+.footer {
+
+  &_text {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
   }
-    &_title {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    &_text {}
 }
 </style>

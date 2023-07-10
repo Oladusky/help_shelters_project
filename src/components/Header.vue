@@ -16,7 +16,7 @@
             </div>
         </header>
     </MainView>
-    <header v-if="mainStore.isMobile" class="header-mob">
+    <header v-if="mainStore.isMobileOrTablet" class="header-mob">
         <div class="header-mob_top">
             <div class="header-mob_logo">
                 <img src="../assets/icons8-pets-100.png" alt="Логотип"/>

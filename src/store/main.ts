@@ -29,6 +29,7 @@ export const useMainStore = defineStore('main', {
                     windowHeight: window.visualViewport?.height || window.innerHeight,
                     offsetWidth: document.documentElement.offsetWidth,
                 }
+                console.log(window.innerWidth)
                 let changed = false
 
                 for (const [key, value] of Object.entries(newData)) {
@@ -39,8 +40,9 @@ export const useMainStore = defineStore('main', {
                 }
 
                 if (changed) {
-                    this.isMobile = window.innerWidth < 768,
+                        this.isMobile = window.innerWidth < 768,
                         this.isTablet = window.innerWidth < 1280 && window.innerWidth >= 768,
+                        this.isMobileOrTablet = this.isMobile || this.isTablet,
                         this.windowWidth = window.innerWidth,
                         this.windowHeight = window.visualViewport?.height || window.innerHeight,
                         this.offsetWidth = document.documentElement.offsetWidth,

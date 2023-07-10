@@ -1,19 +1,20 @@
 <template>
     <Header/>
     <router-view/>
+    <Footer/>
 </template>
 
 <script lang="ts">
     import Header from '@/components/Header.vue'
-    import { defineComponent, onMounted, ref, watch } from 'vue'
+    import { defineComponent, onMounted } from 'vue'
     import { useMainStore } from '@/store/main'
+    import Footer from '@/components/Footer.vue'
     export default defineComponent({
-        components: { Header },
+        components: { Footer, Header },
         setup () {
             const mainStore = useMainStore()
             onMounted(() => {
                 mainStore.setDevice()
-              console.log(mainStore.isPC, mainStore.isMobile)
             })
             return {}
         }
