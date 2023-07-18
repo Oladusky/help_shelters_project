@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import HomePage from '@/views/MainPage.vue'
+import ShelterPage from '@/views/ShelterPage.vue'
 
 export const routes = [
     {
@@ -12,12 +13,18 @@ export const routes = [
         }
     },
     {
-        path: '/shelter',
+        path: '/shelters',
         name: 'shelters',
-        component: HomePage,
+        component: ShelterPage,
         query: {
             lang: 'rus'
-        }
+        },
+        children: [
+            {
+                path: ':id',
+                component: ShelterPage
+            }
+        ],
     },
     {
         path: '/news',

@@ -1,7 +1,6 @@
 <template>
-    <MainView class="footer">
-        <p class="footer_text">{{ content.footer.line_one }}</p>
-        <p class="footer_text">{{ content.footer.line_two }}</p>
+    <MainView class="shelters">
+        shelters
     </MainView>
 </template>
 
@@ -32,13 +31,4 @@
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  border-top: 4px solid $main-green;
-  padding-top: 10px;
-  &_text {
-    font-size: 10px;
-    margin: 0;
-    padding: 3px 0;
-  }
-}
 </style>

@@ -14,7 +14,7 @@
 
 <style scoped lang="scss">
 .container {
-  margin: 0 15%;
+  margin: 0 10%;
   @include mobile {
     margin: 0 5px;
   }

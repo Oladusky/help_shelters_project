@@ -20,16 +20,19 @@ export const useMainPageStore = defineStore('mainPage', {
                         links: [
                             {
                                 name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
                                 link: 'b',
                                 icon: 'c',
                             },
                             {
                                 name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
                                 link: 'b',
                                 icon: 'c',
                             },
                             {
                                 name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
                                 link: 'b',
                                 icon: 'c',
                             },
@@ -49,10 +52,37 @@ export const useMainPageStore = defineStore('mainPage', {
                     infoBanner: {
                         header: '',
                         text: '',
+                    },
+                    socialLinks: {
+                        header: 'Группы в социальных сетях',
+                        text: 'Здесь вы также можете найти себе домашнего любимца или тех, кому нужна помощь',
+                        links: [
+                            {
+                                name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
+                                link: 'b',
+                                icon: 'c',
+                            },
+                            {
+                                name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
+                                link: 'b',
+                                icon: 'c',
+                            },
+                            {
+                                name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
+                                link: 'b',
+                                icon: 'c',
+                            },
+                        ]
+                    },
+                    footer: {
+                        line_one: 'Данный сайт носит исплючительно информационный характер и создан с целью помочь информационно в сборе средств для приютов',
+                        line_two: 'По поводу идей, предложений или претензий писать на почту ',
                     }
 
                 },
-
                 en: {
                     mainBanner: {
                         banner: '',
@@ -62,8 +92,35 @@ export const useMainPageStore = defineStore('mainPage', {
                     infoBanner: {
                         header: '',
                         text: '',
+                    },
+                    socialLinks: {
+                        header: 'Группы в социальных сетях',
+                        text: 'Здесь вы также можете найти себе домашнего любимца или тех, кому нужна помощь',
+                        links: [
+                            {
+                                name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
+                                link: 'b',
+                                icon: 'icons8-pets-32.png',
+                            },
+                            {
+                                name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
+                                link: 'b',
+                                icon: 'icons8-pets-32.png',
+                            },
+                            {
+                                name: 'friends of moldovian strays',
+                                description: 'friends of moldovian straysfriends of moldovian strays',
+                                link: 'b',
+                                icon: 'icons8-pets-32.png',
+                            },
+                        ]
+                    },
+                    footer: {
+                        line_one: 'Данный сайт носит исплючительно информационный характер и создан с целью помочь информационно в сборе средств для приютов',
+                        line_two: 'По поводу идей, предложений или претензий писать на почту ',
                     }
-
                 },
             },
         }

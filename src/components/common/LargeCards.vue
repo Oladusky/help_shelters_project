@@ -20,7 +20,7 @@
                     {{ content.info.text }}
                 </p>
             </div>
-            <router-link to="/" class="card_button">{{ content.buttons.more }}</router-link>
+            <router-link :to="{ path: `shelters/${card.id}`, query: {lang: mainStore.language} }" class="card_button">{{ content.buttons.more }}</router-link>
         </div>
     </MainView>
 </template>
@@ -40,11 +40,6 @@
             const route = useRoute()
             const showLarge = ref(false)
             let content = ref(sheltersStore.content[route.query.lang])
-            const cardImageStyle = (imagePath) => {
-                return {
-                    backgroundImage: `url(${ require(`/src/assets/shelters/${ imagePath }`) })`
-                }
-            }
             watch(() => route.query.lang, () => {
                 content.value = sheltersStore.content[route.query.lang]
             })
@@ -52,7 +47,6 @@
                 content,
                 mainStore,
                 showLarge,
-                cardImageStyle
             }
         }
     }
