@@ -57,9 +57,12 @@ export const useSheltersStore = defineStore('shelters', {
                             title: 'Лайка',
                             img: 'center_banner.jpg',
                             text: 'This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion.',
-                            textLarge: 'This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.',
+                            textLarge: '<span>О приюте: </span>This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.',
                             amount: 'Amount of pets:',
-                            location: 'location: Chisinau',
+                            number: 333,
+                            location: '<span>Местоположение: </span> Chisinau',
+                            workers: '<span>Количество работников: </span> 3 Natasha Marsim....',
+                            images: ['a','b','c']
                         },
                         {
                             id: 1,
