@@ -52,6 +52,7 @@
     margin: 10px 0;
     font-size: 20px;
     font-weight: 500;
+    white-space: nowrap;
     &:hover {
       color: $main-green;
       text-decoration: underline;
