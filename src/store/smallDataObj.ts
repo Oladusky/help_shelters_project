@@ -6,17 +6,17 @@ export const useSmallDataObjStore = defineStore('smallDataObj', {
             content: {
                 rus: {
                     home: 'Главная',
-                    news: 'Как помочь',
+                    info: 'Как помочь',
                     shelters: 'Приюты',
                 },
                 en: {
                     home: 'Home',
-                    news: 'News',
+                    info: 'How to help',
                     shelters: 'Shelters',
                 },
                 rom: {
                     home: 'H',
-                    news: 'N',
+                    info: 'How to help',
                     shelters: 'Shelters',
                 },
             }

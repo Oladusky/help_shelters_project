@@ -16,6 +16,7 @@ export const routes = [
         path: '/shelters',
         name: 'shelters',
         component: ShelterPage,
+        redirect: 'shelters/0',
         query: {
             lang: 'rus'
         },
@@ -27,8 +28,8 @@ export const routes = [
         ],
     },
     {
-        path: '/news',
-        name: 'news',
+        path: '/info',
+        name: 'info',
         component: HomePage,
         query: {
             lang: 'rus'

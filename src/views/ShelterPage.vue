@@ -58,7 +58,7 @@
                 content.value = sheltersStore.content[route.query.lang]
             })
             watch(() => route.params.id, () => {
-                console.log(route.params.id)
+                console.log('id',route.params.id)
                 shelterInfo.value = content.value.shelters && content.value.shelters.find(shelter => {
                     return shelter.id.toString() === route.params.id
                 })
@@ -119,6 +119,8 @@
     }
     &_location {
       display: flex;
+      justify-content: space-between;
+      margin-right: 20%;
       @include mobile {
         display: block;
       }
