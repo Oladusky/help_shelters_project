@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import HomePage from '@/views/MainPage.vue'
 import ShelterPage from '@/views/ShelterPage.vue'
+import InfoPage from '@/views/InfoPage.vue'
 
 export const routes = [
     {
@@ -30,7 +31,7 @@ export const routes = [
     {
         path: '/info',
         name: 'info',
-        component: HomePage,
+        component: InfoPage,
         query: {
             lang: 'rus'
         }

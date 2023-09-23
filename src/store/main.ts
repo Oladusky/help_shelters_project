@@ -29,7 +29,7 @@ export const useMainStore = defineStore('main', {
                     windowHeight: window.visualViewport?.height || window.innerHeight,
                     offsetWidth: document.documentElement.offsetWidth,
                 }
-                console.log(window.innerWidth)
+
                 let changed = false
 
                 for (const [key, value] of Object.entries(newData)) {

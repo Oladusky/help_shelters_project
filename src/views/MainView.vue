@@ -16,7 +16,7 @@
 .container {
   margin: 0 10%;
   @include mobile {
-    margin: 0 5px;
+    margin: 0 5%;
   }
 }
 </style>
