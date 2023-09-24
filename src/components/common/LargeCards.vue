@@ -20,7 +20,17 @@
                     {{ content.info.text }}
                 </p>
             </div>
-            <router-link :to="{ path: `shelters/${card.id}`, query: {lang: mainStore.language} }" class="card_button">{{ content.buttons.more }}</router-link>
+            <div class="card_footer">
+                <template v-for="link in card.social" >
+                    <div v-if="link.link" class="card_social">
+                        <router-link :to="link.link">
+                            <img :src="`/src/assets/icons/${ link.icon }`"/>
+                        </router-link>
+                    </div>
+                </template>
+
+                <router-link :to="{ path: `shelters/${ card.id }`, query: {lang: mainStore.language} }" class="card_button">{{ content.buttons.more }}</router-link>
+            </div>
         </div>
     </MainView>
 </template>
@@ -56,8 +66,8 @@
 <style lang="scss" scoped>
 .cards {
   display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
   margin-top: 50px;
   @include tablet {
     margin: 30px;
@@ -70,6 +80,7 @@
 }
 
 .card {
+  width: auto;
   background-color: $white;
   border-radius: 0.25rem;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
@@ -86,7 +97,7 @@
 
   &_image {
     width: 100%;
-    height: 500px;
+    height: 300px;
     @include mobile {
       height: 300px;
     }
@@ -117,6 +128,18 @@
     }
   }
 
+  &_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 5%;
+  }
+
+  &_social {
+    width: 20px;
+    height: 20px;
+  }
+
   &_button {
     display: inline-block;
     padding: 5px 15px;
@@ -130,7 +153,6 @@
     overflow: hidden;
     z-index: 1;
     width: 50%;
-    margin: 0 auto;
     text-align: center;
     @include mobile {
       font-size: 10px;

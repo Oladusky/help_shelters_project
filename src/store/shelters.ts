@@ -22,7 +22,12 @@ export const useSheltersStore = defineStore('shelters', {
                             workers: '<span>Количество работников: </span> 3 Natasha Marsim....',
                             contacts: '<span>Контакты: </span> Maria - +(373) 677 455 67',
                             socialHeader: '<span>Социальные сети: </span>',
-                            social: [{ icon:'', name:'', link:'' }],
+                            social: [
+                                { icon:'facebook.svg', name:'facebook', link:'/' },
+                                { icon:'instagram.svg', name:'instagram', link:'/' },
+                                { icon:'tiktok.svg', name:'website', link:'/' },
+                                { icon:'website.svg', name:'tiktok', link:'' },
+                            ],
                             bankDetails: '<span>Реквизиты счета: </span>',
                             bankDetailsArr: [ { bank: 'BC "Moldindconbank" S.A.</br>' +
                                     'Pay Pal: <strong>VERA.BEKTORASH@MAIL.RU</strong></br>' +
@@ -56,7 +61,12 @@ export const useSheltersStore = defineStore('shelters', {
                             workers: '<span>Количество работников: </span> 3 Natasha Marsim....',
                             contacts: '<span>Контакты: </span> Maria - +(373) 677 455 67',
                             socialHeader: '<span>Социальные сети: </span>',
-                            social: [{ icon:'', name:'', link:'' }],
+                            social: [
+                                { icon:'facebook.svg', name:'facebook', link:'' },
+                                { icon:'instagram.svg', name:'instagram', link:'' },
+                                { icon:'tiktok.svg', name:'tiktok', link:'' },
+                                { icon:'website.svg', name:'website', link:'' },
+                            ],
                             bankDetails: '<span>Реквизиты счета: </span>',
                             bankDetailsArr: [ { bank: 'BC "Moldindconbank" S.A.</br>' +
                                     'Pay Pal: <strong>VERA.BEKTORASH@MAIL.RU</strong></br>' +
