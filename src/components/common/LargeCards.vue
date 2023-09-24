@@ -21,15 +21,19 @@
                 </p>
             </div>
             <div class="card_footer">
-                <template v-for="link in card.social" >
-                    <div v-if="link.link" class="card_social">
-                        <router-link :to="link.link">
-                            <img :src="`/src/assets/icons/${ link.icon }`"/>
-                        </router-link>
-                    </div>
-                </template>
+                <div class="card_media">
+                    <template v-for="link in card.social">
+                        <div v-if="link.link" class="card_social">
+                            <router-link :to="link.link">
+                                <img :src="`/src/assets/icons/${ link.icon }`"/>
+                            </router-link>
+                        </div>
+                    </template>
+                </div>
 
-                <router-link :to="{ path: `shelters/${ card.id }`, query: {lang: mainStore.language} }" class="card_button">{{ content.buttons.more }}</router-link>
+                <router-link :to="{ path: `shelters/${ card.id }`, query: {lang: mainStore.language} }"
+                             class="card_button">{{ content.buttons.more }}
+                </router-link>
             </div>
         </div>
     </MainView>
@@ -135,9 +139,16 @@
     margin: 0 5%;
   }
 
+  &_media {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &_social {
     width: 20px;
     height: 20px;
+    margin-right: 10px;
   }
 
   &_button {
@@ -157,6 +168,7 @@
     @include mobile {
       font-size: 10px;
     }
+
     &:after {
       content: '';
       position: absolute;

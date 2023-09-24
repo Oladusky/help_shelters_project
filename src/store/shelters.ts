@@ -28,8 +28,11 @@ export const useSheltersStore = defineStore('shelters', {
                                 { icon:'tiktok.svg', name:'website', link:'/' },
                                 { icon:'website.svg', name:'tiktok', link:'' },
                             ],
-                            bankDetails: '<span>Реквизиты счета: </span>',
-                            bankDetailsArr: [ { bank: 'BC "Moldindconbank" S.A.</br>' +
+                            bankDetails: '<span>Банковские реквизиты: </span>',
+                            bankDetailsArr: [ {
+                                id: 0,
+                                bankName: 'Moldincombank',
+                                requisites: 'BC "Moldindconbank" S.A.</br>' +
                                     'Pay Pal: <strong>VERA.BEKTORASH@MAIL.RU</strong></br>' +
                                     '<strong>Реквизиты для переводов в MDL:</strong></br>' +
                                     'Банк-получатель: BC "Moldindconbank" S.A., SWIFT: MOLDMD2X</br>' +

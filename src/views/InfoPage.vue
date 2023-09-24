@@ -1,14 +1,14 @@
 <template>
     <MainView class="info-page">
-        <div v-for="infoBlock in content" class="info-page__block">
-            <h3 class="info-page__block__title" @click="toggleOpenBlock(infoBlock.id)">
+        <div v-for="infoBlock in content" class="info-page_block">
+            <h3 class="info-page_block_title" @click="toggleOpenBlock(infoBlock.id)">
                 {{ infoBlock.title }}
-                <img class="info-page__block__title__arrow"
+                <img class="info-page_block_title_arrow"
                      src="../assets/icons/icon-arrow.svg"
                      alt="arrow-down"
-                     :class="{ 'arrow-up': openedBlocksId.includes(infoBlock.id) }"/>
+                     :class="{ 'arrow-up': isBlockOpened(infoBlock.id) }"/>
             </h3>
-            <div v-if="openedBlocksId.includes(infoBlock.id)" class="info-page__block__text" v-html="infoBlock.text"/>
+            <div v-if="isBlockOpened(infoBlock.id)" class="info-page_block_text" v-html="infoBlock.text"/>
         </div>
     </MainView>
     <Footer/>
@@ -34,21 +34,25 @@
                 content.value = infoStore.content[route.query.lang]
             })
 
-            const blocksId = content.value.map(infoBlock => infoBlock.id)
+            const blocksId = content.value.map((infoBlock) => infoBlock.id)
             const openedBlocksId = ref(mainStore.isPC ? blocksId : [blocksId[0]])
             const toggleOpenBlock = (id: number): void => {
-                if (openedBlocksId.value.includes(id)) {
-                    openedBlocksId.value = openedBlocksId.value.filter(i => i !== id)
+                if (isBlockOpened(id)) {
+                    openedBlocksId.value = openedBlocksId.value.filter((i: number) => i !== id)
                 } else {
                     openedBlocksId.value.push(id)
                 }
+            }
+
+            const isBlockOpened = (id: number) => {
+                return openedBlocksId.value.includes(id)
             }
 
             return {
                 content,
                 mainStore,
                 toggleOpenBlock,
-                openedBlocksId
+                isBlockOpened
             }
         }
     })
@@ -56,13 +60,13 @@
 
 <style lang="scss">
 .info-page {
-  &__block {
-    &__title {
+  &_block {
+    &_title {
       color: $main-green;
       text-transform: uppercase;
       font-weight: 600;
 
-      &__arrow {
+      &_arrow {
         width: 15px;
         height: 15px;
         transform: rotate(-180deg);
@@ -73,7 +77,7 @@
       }
     }
 
-    &__text {
+    &_text {
 
         strong {
           color: $main-green;

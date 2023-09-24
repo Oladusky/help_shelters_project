@@ -2,7 +2,18 @@
     <MainView class="shelters">
         <LeftNav :links="content.shelters"/>
         <div class="shelters_shelter">
-            <h2>{{ shelterInfo.title }}</h2>
+            <div class="shelters_shelter_header">
+                <h2>{{ shelterInfo.title }}</h2>
+                <div class="shelters_shelter_header_media">
+                    <template v-for="link in shelterInfo.social">
+                        <div v-if="link.link" class="shelters_shelter_header_social">
+                            <router-link :to="link.link">
+                                <img :src="`/src/assets/icons/${ link.icon }`"/>
+                            </router-link>
+                        </div>
+                    </template>
+                </div>
+            </div>
             <div class="shelters_shelter_title">
                 <span class="shelters_shelter_title">{{ shelterInfo.amount }}</span>
                 <span class="shelters_shelter_number">{{ shelterInfo.number }}</span>
@@ -10,13 +21,22 @@
             <div class="shelters_shelter_title" v-html="shelterInfo.workers"/>
             <div class="shelters_shelter_title" v-html="shelterInfo.textLarge"/>
             <div class="shelters_shelter_title" v-html="shelterInfo.contacts"/>
-            <div class="shelters_shelter_title" v-html="shelterInfo.bankDetails"/>
-            <div v-for="bank in shelterInfo.bankDetailsArr" class="shelters_shelter_title">
-                <div v-html="bank.bank"/>
+            <div class="shelters_shelter_title" @click="toggleOpenBlock(shelterInfo.id)" v-html="shelterInfo.bankDetails"/>
+
+            <div v-for="bank in shelterInfo.bankDetailsArr" class="shelters_shelter_bank">
+                <div class="shelters_shelter_bank_title">
+                    <div class="shelters_shelter_bank_name" @click="toggleOpenBlock(shelterInfo.id)" v-html="bank.bankName"/>
+                    <img class="shelters_shelter_bank_arrow"
+                         src="../assets/icons/icon-arrow.svg"
+                         alt="arrow-down"
+                         :class="{ 'arrow-up': isBlockOpened(bank.id) }"/>
+                </div>
+                <div v-if="isBlockOpened(bank.id)" v-html="bank.requisites"/>
             </div>
+
             <div class="shelters_shelter_gallery">
                 <div v-for="image in shelterInfo.images" class="shelters_shelter_gallery_image">
-                    <img :src="`/src/assets/images/${image}`"/>
+                    <img :src="`/src/assets/images/${ image }`"/>
                 </div>
             </div>
             <div class="shelters_shelter_title" v-html="shelterInfo.location"/>
@@ -58,15 +78,31 @@
                 content.value = sheltersStore.content[route.query.lang]
             })
             watch(() => route.params.id, () => {
-                console.log('id',route.params.id)
                 shelterInfo.value = content.value.shelters && content.value.shelters.find(shelter => {
                     return shelter.id.toString() === route.params.id
                 })
             })
+
+            const blocksId = shelterInfo.value.bankDetailsArr.map((elem) => elem.id)
+            const openedBlocksId = ref(mainStore.isPC ? blocksId : [blocksId[0]])
+            const toggleOpenBlock = (id: number): void => {
+                if (isBlockOpened(id)) {
+                    openedBlocksId.value = openedBlocksId.value.filter((i: number) => i !== id)
+                } else {
+                    openedBlocksId.value.push(id)
+                }
+            }
+
+            const isBlockOpened = (id: number) => {
+                return openedBlocksId.value.includes(id)
+            }
+
             return {
                 content,
                 mainStore,
-                shelterInfo
+                shelterInfo,
+                toggleOpenBlock,
+                isBlockOpened
             }
         }
     }
@@ -79,6 +115,22 @@
   &_shelter {
     margin-left: 50px;
 
+    &_header {
+      display: flex;
+      justify-content: space-between;
+      &_media {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &_social {
+        width: 20px;
+        height: 20px;
+        margin-right: 15px;
+      }
+    }
+
     & > div {
       margin-bottom: 25px;
 
@@ -86,6 +138,32 @@
         font-size: 18px;
         font-weight: 500;
         color: $main-green;
+      }
+    }
+
+    &_bank {
+      margin-left: 20px;
+      &_title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+
+      &_name {
+        font-size: 16px;
+        margin-right: 10px;
+        border-bottom: 3px solid $main-green;
+      }
+
+      &_arrow {
+        width: 15px;
+        height: 15px;
+        transform: rotate(-180deg);
+
+        &.arrow-up {
+          transform: rotate(0);
+        }
       }
     }
 
