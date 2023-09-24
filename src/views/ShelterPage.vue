@@ -1,6 +1,6 @@
 <template>
     <MainView class="shelters">
-        <LeftNav :links="content.shelters"/>
+        <LeftNav v-if="isPC" :links="content.shelters"/>
         <div class="shelters_shelter">
             <div class="shelters_shelter_header">
                 <h2>{{ shelterInfo.title }}</h2>
@@ -69,6 +69,7 @@
             const sheltersStore = useSheltersStore()
             const mainStore = useMainStore()
             const route = useRoute()
+            const isPC = ref(mainStore.isPC)
             let content = ref(sheltersStore.content[route.query.lang])
             let shelterInfo = ref(content.value.shelters && content.value.shelters.find(shelter => {
                 return shelter.id.toString() === route.params.id
@@ -102,7 +103,8 @@
                 mainStore,
                 shelterInfo,
                 toggleOpenBlock,
-                isBlockOpened
+                isBlockOpened,
+                isPC
             }
         }
     }
@@ -111,9 +113,14 @@
 <style lang="scss" scoped>
 .shelters {
   display: flex;
+  width: 100vw;
 
   &_shelter {
     margin-left: 50px;
+    @include mobileOrTablet {
+      margin-left: 0;
+      width: 100%;
+    }
 
     &_header {
       display: flex;
