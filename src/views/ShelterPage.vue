@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-    import { ref, watch, reactive } from 'vue'
+    import {ref, watch, reactive, onMounted, onBeforeMount} from 'vue'
     import { useMainStore } from '@/store/main'
     import { useRoute } from 'vue-router'
     import MainView from '@/views/MainView.vue'
@@ -80,7 +80,7 @@
             })
             watch(() => route.params.id, () => {
                 shelterInfo.value = content.value.shelters && content.value.shelters.find(shelter => {
-                    return shelter.id.toString() === route.params.id
+                    return shelter.id.toString() === route.params.id ?? 0
                 })
             })
 
@@ -104,7 +104,8 @@
                 shelterInfo,
                 toggleOpenBlock,
                 isBlockOpened,
-                isPC
+                isPC,
+                route
             }
         }
     }
@@ -113,7 +114,6 @@
 <style lang="scss" scoped>
 .shelters {
   display: flex;
-  width: 100vw;
 
   &_shelter {
     margin-left: 50px;

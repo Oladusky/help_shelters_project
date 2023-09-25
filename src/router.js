@@ -17,14 +17,13 @@ export const routes = [
         path: '/shelters',
         name: 'shelters',
         component: ShelterPage,
-        redirect: 'shelters/0',
         query: {
             lang: 'rus'
         },
         children: [
             {
-                path: ':id',
-                component: ShelterPage
+                path: ':id', // Путь, ожидающий id
+                component: ShelterPage,
             }
         ],
     },

@@ -1,6 +1,11 @@
 <template>
     <div class="left-nav">
-        <router-link v-for="link in links" :to="{ path: `${link.id}`, query: {lang: mainStore.language} }" class="left-nav_link">
+        <router-link
+            v-for="link in links"
+            :to="{ path: path ? `${ path }/${ link.id }` : `${ link.id }`, query: {lang: mainStore.language} }"
+            class="left-nav_link"
+            @click="$emit('clicked')"
+        >
             {{ link.title }}
         </router-link>
     </div>
@@ -11,7 +16,7 @@
     import { useMainStore } from '@/store/main'
     import { useRoute } from 'vue-router'
     import MainView from '@/views/MainView.vue'
-    import {useSheltersStore} from "@/store/shelters";
+    import { useSheltersStore } from '@/store/shelters'
 
     export default {
         components: { MainView },
@@ -19,9 +24,12 @@
             links: {
                 type: Array,
                 required: true
-            }  
+            },
+            path: {
+                type: String,
+            }
         },
-        setup: function () {
+        setup () {
             const sheltersStore = useSheltersStore()
             const mainStore = useMainStore()
             const route = useRoute()
@@ -29,10 +37,10 @@
             watch(() => route.query.lang, () => {
                 content.value = sheltersStore.content[route.query.lang]
             })
+
             return {
                 content,
-                mainStore
-
+                mainStore,
             }
         }
     }
@@ -48,11 +56,23 @@
   width: max-content;
   height: 40vh;
   padding-right: 45px;
+
+  @include mobileOrTablet {
+    border-right: none;
+    height: auto;
+  }
+
   &_link {
     margin: 10px 0;
     font-size: 20px;
     font-weight: 500;
     white-space: nowrap;
+
+    @include mobileOrTablet {
+        font-size: 14px;
+        margin: -10px 10px 20px 10px;
+    }
+
     &:hover {
       color: $main-green;
       text-decoration: underline;

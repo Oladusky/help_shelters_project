@@ -5,7 +5,9 @@
                 <img src="../assets/icons8-pets-100.png" alt="Логотип"/>
             </div>
             <div class="header_links">
-                <router-link v-for="link in routes" :to="{ name: link.name, query: {...route.query} }" class="header_links_link">
+                <router-link v-for="link in routes" :to="{ name: link.name, query: {...route.query} }"
+                             class="header_links_link"
+                >
                     {{ links[link.name] }}
                 </router-link>
             </div>
@@ -22,18 +24,39 @@
                 <img src="../assets/icons8-pets-100.png" alt="Логотип"/>
             </div>
             <div class="header-mob_burger">
-                <img v-if="!showMobMenu" src="../assets/icons8-menu-squared-50.png" alt="Логотип" @click="showMobMenu = true"/>
-                <img v-else src="../assets/icons8-cross-50.png" alt="Логотип" @click="showMobMenu = false"/>
+                <img v-if="!showMobMenu"
+                     src="../assets/icons8-menu-squared-50.png" alt="Логотип"
+                     @click="showMobMenu = true"
+                />
+                <img v-else
+                     src="../assets/icons8-cross-50.png" alt="Логотип"
+                     @click="showMobMenu = false"
+                />
             </div>
         </div>
         <div v-if="showMobMenu" class="header-mob_bottom">
             <div class="header-mob_links">
-                <router-link v-for="link in routes" :to="{ name: link.name, query: {...route.query} }" class="header-mob_links_link">
-                    {{ links[link.name] }}
-                </router-link>
+                <template v-for="link in routes">
+                    <router-link :to="{ name: link.name, query: {...route.query} }"
+                                 class="header-mob_links_link"
+                                 @click="showMobMenu = false"
+                    >
+                        {{ links[link.name] }}
+                    </router-link>
+                    <LeftNav 
+                        v-if="link.name === 'shelters'" 
+                        :links="shelters.shelters"
+                        path="/shelters"
+                        @clicked="showMobMenu = false"
+                    />
+                </template>
             </div>
             <div class="header-mob_langs">
-                <div v-for="lang in languages" :key="lang" class="header-mob_langs_lang" @click="changeLanguage(lang)">
+                <div v-for="lang in languages"
+                     :key="lang"
+                     class="header-mob_langs_lang"
+                     @click="changeLanguage(lang), showMobMenu = false"
+                >
                     {{ lang }}
                 </div>
             </div>
@@ -49,18 +72,27 @@
     import MainView from '@/views/MainView.vue'
     import { useRoute, useRouter } from 'vue-router'
     import { useSmallDataObjStore } from '@/store/smallDataObj'
+    import LeftNav from '@/components/common/LeftNav.vue'
+    import { useSheltersStore } from '@/store/shelters'
 
     export default {
-        components: { MainView },
+        components: { LeftNav, MainView },
         setup () {
             const mainStore = useMainStore()
             const smallDataStore = useSmallDataObjStore()
+            const sheltersStore = useSheltersStore()
+
             const languages = ref<Language[]>(['en', 'rus', 'rom'])
             const router = useRouter()
             const route = useRoute()
+
             const showMobMenu = ref(false)
             const lang = ref(route.query.lang)
             const links = ref('')
+            let shelters = ref(sheltersStore.content[route.query.lang])
+            watch(() => route.query.lang, () => {
+                shelters.value = sheltersStore.content[route.query.lang]
+            })
 
             watch(() => route.query.lang, (newValue) => {
                 lang.value = newValue
@@ -82,7 +114,8 @@
                 routes,
                 route,
                 showMobMenu,
-                links
+                links,
+                shelters
             }
         }
     }
@@ -97,17 +130,20 @@
   padding: 10px;
 
   &_logo {
-      width: 80px;
-      & img {
-        width: 100%;
-      }
+    width: 80px;
+
+    & img {
+      width: 100%;
+    }
   }
 
   &_links {
     text-transform: uppercase;
     font-weight: 600;
+
     &_link {
       padding-right: 40px;
+
       &:hover {
         color: $main-green;
       }
@@ -117,11 +153,13 @@
 
   &_langs {
     display: flex;
+
     &_lang {
       padding: 5px;
       margin-right: 20px;
       cursor: pointer;
       font-weight: 500;
+
       &:hover {
         color: $white;
         background: $main-green;
@@ -131,6 +169,7 @@
 
   }
 }
+
 .header-mob {
   padding: 10px;
   position: relative;
@@ -141,18 +180,24 @@
     justify-content: space-between;
     align-items: center;
   }
+
   &_burger {
     width: 40px;
+
     & img {
       width: 100%;
+      border-radius: 35%;
     }
   }
+
   &_logo {
     width: 64px;
+
     & img {
       width: 100%;
     }
   }
+
   &_bottom {
     width: 98vw;
     height: 100vh;
@@ -161,6 +206,7 @@
     background: $white;
     z-index: 999;
   }
+
   &_links {
     display: flex;
     flex-direction: column;
@@ -176,11 +222,13 @@
   &_langs {
     display: flex;
     margin-left: 10px;
+
     &_lang {
       padding: 5px;
       margin-right: 20px;
       cursor: pointer;
       font-weight: 500;
+
       &:hover {
         color: $white;
         background: $main-green;
