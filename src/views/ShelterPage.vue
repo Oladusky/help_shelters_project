@@ -69,10 +69,12 @@
             const sheltersStore = useSheltersStore()
             const mainStore = useMainStore()
             const route = useRoute()
+            const shelterId = route.params.id ?? '0'
+            console.log(shelterId)
             const isPC = ref(mainStore.isPC)
             let content = ref(sheltersStore.content[route.query.lang])
             let shelterInfo = ref(content.value.shelters && content.value.shelters.find(shelter => {
-                return shelter.id.toString() === route.params.id
+                return shelter.id.toString() === shelterId
             }))
 
             watch(() => route.query.lang, () => {
@@ -80,7 +82,7 @@
             })
             watch(() => route.params.id, () => {
                 shelterInfo.value = content.value.shelters && content.value.shelters.find(shelter => {
-                    return shelter.id.toString() === route.params.id ?? 0
+                    return shelter.id.toString() === shelterId
                 })
             })
 

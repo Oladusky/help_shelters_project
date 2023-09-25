@@ -2,7 +2,7 @@
     <div class="left-nav">
         <router-link
             v-for="link in links"
-            :to="{ path: path ? `${ path }/${ link.id }` : `${ link.id }`, query: {lang: mainStore.language} }"
+            :to="{ path: path ? `${ path }/${ link.id }` : `/shelters/${ link.id }`, query: {lang: mainStore.language} }"
             class="left-nav_link"
             @click="$emit('clicked')"
         >

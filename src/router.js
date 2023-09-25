@@ -22,7 +22,7 @@ export const routes = [
         },
         children: [
             {
-                path: ':id', // Путь, ожидающий id
+                path: ':id',
                 component: ShelterPage,
             }
         ],
