@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import {defineStore} from 'pinia'
 
 export const useMainPageStore = defineStore('mainPage', {
     state: () => {
@@ -18,31 +18,36 @@ export const useMainPageStore = defineStore('mainPage', {
                     },
                     socialLinks: {
                         header: 'Группы в социальных сетях',
-                        text: 'Здесь вы также можете найти себе домашнего любимца или тех, кому нужна помощь',
-                        links: [
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'c',
-                            },
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'c',
-                            },
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'c',
-                            },
-                        ]
+                        text: 'В этих группах люди выставляют информацию о животных, которые ищут дом или о тех, кому нужна помощь. Если вы не нашли подходящего питомца, напишите обьявление и вам обязательно помогут.',
+                        links: {
+                            facebook: [
+                                {
+                                    name: 'animalute pe degeaba',
+                                    link: 'https://www.facebook.com/groups/809873382465795/',
+                                },
+                                {
+                                    name: 'Кишиневский клуб любителей животных/Clubul Iubitorilor De Animale Chisinau',
+                                    link: 'https://www.facebook.com/groups/catanddogmd/',
+                                },
+                                {
+                                    name: 'Protectia animalelor Chisinau',
+                                    link: 'https://www.facebook.com/groups/protectia.animalelor.chisinau/',
+                                },
+                                {
+                                    name: 'Adopta - Moldova (Мы ищем дом)',
+                                    link: 'https://www.facebook.com/groups/AdoptaMoldova/'
+                                },
+                                {
+                                    name: 'Волонтерская группа\'\'Забота о бездомных животных Молдова.\'\'Помощь.Ищем дом.',
+                                    link: 'https://www.facebook.com/groups/237652107095330/'
+                                }
+                            ],
+                            instagram: []
+                        }
                     },
                     footer: {
                         line_one: 'Данный сайт носит исплючительно информационный характер и создан с целью помочь информационно в сборе средств для приютов',
-                        line_two: 'По поводу идей, предложений или претензий писать на почту ',
+                        line_two: 'По поводу проблем в работе сайта, а также идей, предложений или претензий писать на почту: ',
                     }
                 },
                 rom: {
@@ -57,27 +62,32 @@ export const useMainPageStore = defineStore('mainPage', {
                     },
                     socialLinks: {
                         header: 'Группы в социальных сетях',
-                        text: 'Здесь вы также можете найти себе домашнего любимца или тех, кому нужна помощь',
-                        links: [
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'c',
-                            },
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'c',
-                            },
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'c',
-                            },
-                        ]
+                        text: 'В этих группах люди выставляют информацию о животных, которые ищут дом или о тех, кому нужна помощь. Если вы не нашли подходящего питомца, напишите обьявление и вам обязательно помогут.',
+                        links: {
+                            facebook: [
+                                {
+                                    name: 'animalute pe degeaba',
+                                    link: 'https://www.facebook.com/groups/809873382465795/',
+                                },
+                                {
+                                    name: 'Кишиневский клуб любителей животных/Clubul Iubitorilor De Animale Chisinau',
+                                    link: 'https://www.facebook.com/groups/catanddogmd/',
+                                },
+                                {
+                                    name: 'Protectia animalelor Chisinau',
+                                    link: 'https://www.facebook.com/groups/protectia.animalelor.chisinau/',
+                                },
+                                {
+                                    name: 'Adopta - Moldova (Мы ищем дом)',
+                                    link: 'https://www.facebook.com/groups/AdoptaMoldova/'
+                                },
+                                {
+                                    name: 'Волонтерская группа\'\'Забота о бездомных животных Молдова.\'\'Помощь.Ищем дом.',
+                                    link: 'https://www.facebook.com/groups/237652107095330/'
+                                }
+                            ],
+                            instagram: []
+                        }
                     },
                     footer: {
                         line_one: 'Данный сайт носит исплючительно информационный характер и создан с целью помочь информационно в сборе средств для приютов',
@@ -97,27 +107,32 @@ export const useMainPageStore = defineStore('mainPage', {
                     },
                     socialLinks: {
                         header: 'Группы в социальных сетях',
-                        text: 'Здесь вы также можете найти себе домашнего любимца или тех, кому нужна помощь',
-                        links: [
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'icons8-pets-32.png',
-                            },
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'icons8-pets-32.png',
-                            },
-                            {
-                                name: 'friends of moldovian strays',
-                                description: 'friends of moldovian straysfriends of moldovian strays',
-                                link: 'b',
-                                icon: 'icons8-pets-32.png',
-                            },
-                        ]
+                        text: 'В этих группах люди выставляют информацию о животных, которые ищут дом или о тех, кому нужна помощь. Если вы не нашли подходящего питомца, напишите обьявление и вам обязательно помогут.',
+                        links: {
+                            facebook: [
+                                {
+                                    name: 'animalute pe degeaba',
+                                    link: 'https://www.facebook.com/groups/809873382465795/',
+                                },
+                                {
+                                    name: 'Кишиневский клуб любителей животных/Clubul Iubitorilor De Animale Chisinau',
+                                    link: 'https://www.facebook.com/groups/catanddogmd/',
+                                },
+                                {
+                                    name: 'Protectia animalelor Chisinau',
+                                    link: 'https://www.facebook.com/groups/protectia.animalelor.chisinau/',
+                                },
+                                {
+                                    name: 'Adopta - Moldova (Мы ищем дом)',
+                                    link: 'https://www.facebook.com/groups/AdoptaMoldova/'
+                                },
+                                {
+                                    name: 'Волонтерская группа\'\'Забота о бездомных животных Молдова.\'\'Помощь.Ищем дом.',
+                                    link: 'https://www.facebook.com/groups/237652107095330/'
+                                }
+                            ],
+                            instagram: []
+                        }
                     },
                     footer: {
                         line_one: 'Данный сайт носит исплючительно информационный характер и создан с целью помочь информационно в сборе средств для приютов',

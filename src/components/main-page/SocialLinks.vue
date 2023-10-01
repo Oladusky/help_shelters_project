@@ -3,13 +3,12 @@
         <h2 class="social_title">{{ content.socialLinks.header }}</h2>
         <p class="social_text">{{ content.socialLinks.text }}</p>
         <div class="social_links">
-            <div v-for="link in content.socialLinks.links" class="social_links_link">
-                <div class="social_links_link_icon"><img :src="`/src/assets/${link.icon}`"/></div>
-                <div class="social_links_link_description">
-                    <h3 class="social_links_link_header"><a :href="link.link">{{link.name}}</a></h3>
-                    <p class="social_links_link_text">{{link.description}}</p>
-                </div>
-            </div>
+            <div class="social_links_icon"><img :src="`/src/assets/icons/facebook.svg`"/>Facebook:</div>
+            <ul v-for="link in content.socialLinks.links.facebook" class="social_links_link">
+                <li class="social_links_link_description">
+                    <a class="social_links_link_header" :href="link.link">{{link.name}}</a>
+                </li>
+            </ul>
         </div>
     </MainView>
 </template>
@@ -55,14 +54,29 @@
 
   &_links {
     width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+
+    &_icon {
+      display: flex;
+      align-items: center;
+
+      img {
+        margin-right: 15px;
+        width: 25px;
+        height: 25px;
+      }
+    }
+
     &_link {
       display: flex;
       align-items: center;
-      &_icon {
+      list-style-type: '\2713';
+      color: $main-green;
 
+      &_header {
+        margin-left: 10px;
       }
-      &_header {}
-      &_text {}
     }
   }
 }
