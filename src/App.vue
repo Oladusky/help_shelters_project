@@ -8,6 +8,7 @@
     import { defineComponent, onMounted } from 'vue'
     import { useMainStore } from '@/store/main'
     import Footer from '@/components/Footer.vue'
+
     export default defineComponent({
         components: { Footer, Header },
         setup () {

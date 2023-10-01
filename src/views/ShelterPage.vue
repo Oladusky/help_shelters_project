@@ -35,9 +35,23 @@
             </div>
 
             <div class="shelters_shelter_gallery">
-                <div v-for="image in shelterInfo.images" class="shelters_shelter_gallery_image">
-                    <img :src="`/src/assets/images/${ image }`"/>
-                </div>
+                <swiper
+                    :spaceBetween="30"
+                    :slidesPerView="mainStore.isPC ? 3 : 1"
+                    :autoplay="{
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    }"
+                    :pagination="{
+                        clickable: true,
+                    }"
+                    :navigation="true"
+                    class="shelters_shelter_gallery_swiper"
+                >
+                    <swiper-slide v-for="(imageName, index) in images" :key="index">
+                        <img :src="`/src/assets/images/${imageName}`" alt="Image" class="shelters_shelter_gallery_image"/>
+                    </swiper-slide>
+                </swiper>
             </div>
             <div class="shelters_shelter_title" v-html="shelterInfo.location"/>
             <div class="shelters_shelter_location">
@@ -55,7 +69,7 @@
 </template>
 
 <script lang="ts">
-    import {ref, watch, reactive, onMounted, onBeforeMount} from 'vue'
+    import { ref, watch, reactive, onMounted, onBeforeMount } from 'vue'
     import { useMainStore } from '@/store/main'
     import { useRoute } from 'vue-router'
     import MainView from '@/views/MainView.vue'
@@ -70,7 +84,9 @@
             const mainStore = useMainStore()
             const route = useRoute()
             const shelterId = route.params.id ?? '0'
-            console.log(shelterId)
+
+            const images = ['center_banner.jpg', 'left_banner.jpg', 'right_banner.jpg', 'right_banner.jpg']
+
             const isPC = ref(mainStore.isPC)
             let content = ref(sheltersStore.content[route.query.lang])
             let shelterInfo = ref(content.value.shelters && content.value.shelters.find(shelter => {
@@ -107,7 +123,8 @@
                 toggleOpenBlock,
                 isBlockOpened,
                 isPC,
-                route
+                route,
+                images
             }
         }
     }
@@ -118,10 +135,11 @@
   display: flex;
 
   &_shelter {
-    margin-left: 50px;
+    margin: 0 50px;
+    width: 90%;
+
     @include mobileOrTablet {
       margin-left: 0;
-      width: 100%;
     }
 
     &_header {
@@ -177,32 +195,29 @@
     }
 
     &_gallery {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(3, 1fr);
-      margin-top: 50px;
-      @include tablet {
-        margin: 30px;
-        gap: 20px;
-      }
-      @include mobile {
-        display: block;
-        margin-top: 30px;
+      height: 400px;
+
+      @include mobileOrTablet {
+        height: 300px;
       }
 
+      &_swiper {
+        height: 100%;
+        border-radius: 4px;
+
+        :deep(*) {
+          span {
+            background: $white;
+          }
+
+          color: $white;
+        }
+      }
       &_image {
         width: 100%;
-        height: 250px;
-        margin-bottom: 10px;
-        @include mobile {
-          height: 100px;
-        }
-
-        & img {
-          width: 100%;
-          height: 100%;
-        }
+        height: 100%;
       }
+
     }
     &_location {
       display: flex;

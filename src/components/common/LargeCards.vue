@@ -96,7 +96,7 @@
   padding-bottom: 10px;
 
   @include mobile {
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 
   &_image {
