@@ -31,8 +31,8 @@ export const useSheltersStore = defineStore('shelters', {
                             bankDetails: '<span>Банковские реквизиты: </span>',
                             bankDetailsArr: [ {
                                 id: 0,
-                                bankName: 'Moldincombank',
-                                requisites: 'BC "Moldindconbank" S.A.</br>' +
+                                header: 'Moldincombank',
+                                content: 'BC "Moldindconbank" S.A.</br>' +
                                     'Pay Pal: <strong>VERA.BEKTORASH@MAIL.RU</strong></br>' +
                                     '<strong>Реквизиты для переводов в MDL:</strong></br>' +
                                     'Банк-получатель: BC "Moldindconbank" S.A., SWIFT: MOLDMD2X</br>' +

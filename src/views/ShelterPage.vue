@@ -21,17 +21,10 @@
             <div class="shelters_shelter_title" v-html="shelterInfo.workers"/>
             <div class="shelters_shelter_title" v-html="shelterInfo.textLarge"/>
             <div class="shelters_shelter_title" v-html="shelterInfo.contacts"/>
-            <div class="shelters_shelter_title" @click="toggleOpenBlock(shelterInfo.id)" v-html="shelterInfo.bankDetails"/>
+            <div class="shelters_shelter_title" v-html="shelterInfo.bankDetails"/>
 
-            <div v-for="bank in shelterInfo.bankDetailsArr" class="shelters_shelter_bank">
-                <div class="shelters_shelter_bank_title">
-                    <div class="shelters_shelter_bank_name" @click="toggleOpenBlock(shelterInfo.id)" v-html="bank.bankName"/>
-                    <img class="shelters_shelter_bank_arrow"
-                         src="../assets/icons/icon-arrow.svg"
-                         alt="arrow-down"
-                         :class="{ 'arrow-up': isBlockOpened(bank.id) }"/>
-                </div>
-                <div v-if="isBlockOpened(bank.id)" v-html="bank.requisites"/>
+            <div class="shelters_shelter_banks">
+                <ToggleOpenList class="shelters_shelter_banks" :elements="shelterInfo.bankDetailsArr" :opened-blocks-id="blocksId[0]"/>
             </div>
 
             <div class="shelters_shelter_gallery">
@@ -76,9 +69,10 @@
     import LeftNav from '@/components/common/LeftNav.vue'
     import { useSheltersStore } from '@/store/shelters'
     import Footer from '@/components/Footer.vue'
+    import ToggleOpenList from "@/components/common/ToggleOpenList.vue";
 
     export default {
-        components: { Footer, LeftNav, MainView },
+        components: { ToggleOpenList, Footer, LeftNav, MainView },
         setup () {
             const sheltersStore = useSheltersStore()
             const mainStore = useMainStore()
@@ -103,28 +97,15 @@
             })
 
             const blocksId = shelterInfo.value.bankDetailsArr.map((elem) => elem.id)
-            const openedBlocksId = ref(mainStore.isPC ? blocksId : [blocksId[0]])
-            const toggleOpenBlock = (id: number): void => {
-                if (isBlockOpened(id)) {
-                    openedBlocksId.value = openedBlocksId.value.filter((i: number) => i !== id)
-                } else {
-                    openedBlocksId.value.push(id)
-                }
-            }
-
-            const isBlockOpened = (id: number) => {
-                return openedBlocksId.value.includes(id)
-            }
 
             return {
                 content,
                 mainStore,
                 shelterInfo,
-                toggleOpenBlock,
-                isBlockOpened,
                 isPC,
                 route,
-                images
+                images,
+                blocksId
             }
         }
     }
@@ -168,30 +149,8 @@
       }
     }
 
-    &_bank {
-      margin-left: 20px;
-      &_title {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        font-weight: 500;
-      }
-
-      &_name {
-        font-size: 16px;
-        margin-right: 10px;
-        border-bottom: 3px solid $main-green;
-      }
-
-      &_arrow {
-        width: 15px;
-        height: 15px;
-        transform: rotate(-180deg);
-
-        &.arrow-up {
-          transform: rotate(0);
-        }
-      }
+    &_banks {
+      margin-bottom: 20px;
     }
 
     &_gallery {
