@@ -7,6 +7,11 @@
             @click="$emit('clicked')"
         >
             {{ link.title }}
+            <router-link v-for="nestedLink in link.nestedLinks" v-if="link.nestedLinks"
+                         :to="{ path: `/vets/${ nestedLink.id }`, query: {lang: mainStore.language} }"
+                         class="left-nav_nested-link">
+                {{ nestedLink.title}}
+            </router-link>
         </router-link>
     </div>
 </template>
@@ -27,6 +32,9 @@
             },
             path: {
                 type: String,
+            },
+            nestedLinks: {
+                type: Boolean,
             }
         },
         setup () {
@@ -63,6 +71,8 @@
   }
 
   &_link {
+    display: flex;
+    flex-direction: column;
     margin: 10px 0;
     font-size: 20px;
     font-weight: 500;
@@ -76,6 +86,15 @@
     &:hover {
       color: $main-green;
       text-decoration: underline;
+    }
+  }
+
+  &_nested-link {
+    font-size: 18px;
+    margin: 5px 5px 5px 15px;
+
+    @include mobileOrTablet {
+      font-size: 14px;
     }
   }
 }

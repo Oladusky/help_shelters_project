@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/MainPage.vue'
 import ShelterPage from '@/views/ShelterPage.vue'
 import InfoPage from '@/views/InfoPage.vue'
+import VetClinicPage from '@/views/VetClinicPage.vue'
 
 export const routes = [
     {
@@ -31,6 +32,14 @@ export const routes = [
         path: '/info',
         name: 'info',
         component: InfoPage,
+        query: {
+            lang: 'rus'
+        }
+    },
+    {
+        path: '/vets',
+        name: 'vets',
+        component: VetClinicPage,
         query: {
             lang: 'rus'
         }
