@@ -14,7 +14,7 @@
                             <template v-for="link in vetInfo.socialLinks">
                                 <div v-if="link.link">
                                     <router-link :to="link.link">
-<!--                                        <img :src="`/src/assets/icons/${ link.icon }`" alt="icon"/>-->
+                                        <img :src="`/src/assets/icons/${ link.icon }`" alt="icon"/>
                                     </router-link>
                                 </div>
                             </template>

@@ -21,7 +21,7 @@ export const useVetClinicsStore = defineStore('vets', {
                                 { icon:'tiktok.svg', name:'website', link:'/' },
                                 { icon:'website.svg', name:'tiktok', link:'' },
                             ],
-                            photos: ['alice/left_banner.jpg','alice/right_banner.jpg','alice/left_banner.jpg','alice/right_banner.jpg'],
+                            photos: ['alice/left_banner.jpg'],
                             services: [
                                 {
                                     header: 'Категория 1',
