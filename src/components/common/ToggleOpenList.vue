@@ -7,7 +7,8 @@
                  alt="arrow-down"
                  :class="{ 'arrow-up': isBlockOpened(elem.id) }"/>
         </div>
-        <div v-if="isBlockOpened(elem.id)" v-html="elem.content"/>
+        <div v-if="isBlockOpened(elem.id) && !$slots.content" v-html="elem.content"/>
+        <slot v-if="isBlockOpened(elem.id)" name="content" :elemContent="elem.content"/>
     </div>
 </template>
 

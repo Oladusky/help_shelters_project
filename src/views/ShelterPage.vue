@@ -62,14 +62,14 @@
 </template>
 
 <script lang="ts">
-    import { ref, watch, reactive, onMounted, onBeforeMount } from 'vue'
+    import { ref, watch } from 'vue'
     import { useMainStore } from '@/store/main'
     import { useRoute } from 'vue-router'
     import MainView from '@/views/MainView.vue'
     import LeftNav from '@/components/common/LeftNav.vue'
     import { useSheltersStore } from '@/store/shelters'
     import Footer from '@/components/Footer.vue'
-    import ToggleOpenList from "@/components/common/ToggleOpenList.vue";
+    import ToggleOpenList from '@/components/common/ToggleOpenList.vue'
 
     export default {
         components: { ToggleOpenList, Footer, LeftNav, MainView },

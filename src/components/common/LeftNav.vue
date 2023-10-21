@@ -7,11 +7,6 @@
             @click="$emit('clicked')"
         >
             {{ link.title }}
-            <router-link v-for="nestedLink in link.nestedLinks" v-if="link.nestedLinks"
-                         :to="{ path: `/vets/${ nestedLink.id }`, query: {lang: mainStore.language} }"
-                         class="left-nav_nested-link">
-                {{ nestedLink.title}}
-            </router-link>
         </router-link>
     </div>
 </template>
