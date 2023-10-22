@@ -1,7 +1,7 @@
 <template>
     <div v-for="elem in elements" class="toggle-list">
         <div class="toggle-list_title">
-            <div class="toggle-list_name" @click="toggleOpenBlock(elem.id)" v-html="elem.header"/>
+            <div class="toggle-list_name" :style="{'font-size': headerFontSize}" @click="toggleOpenBlock(elem.id)" v-html="elem.header"/>
             <img class="toggle-list_arrow"
                  src="../../assets/icons/icon-arrow.svg"
                  alt="arrow-down"
@@ -23,6 +23,9 @@
             },
             openedBlocksId: {
                 type: Array,
+            },
+            headerFontSize: {
+                type: String
             }
         },
         setup (props) {
