@@ -1,15 +1,20 @@
 <template>
     <MainView class="vets">
-        <LeftNav :links="content.vets"/>
+        <div v-if="isPC" class="vets_nav">
+            <div v-for="sector in sectors" class="vets_nav_link">
+                {{ sector.name }}
+                <LeftNav v-if="getClinicsById(sector.id).length" :links="getClinicsById(sector.id)" path="vets" :show-border="false"/>
+            </div>
+        </div>
         <div class="vets_wrapper">
             <h1>{{ vetInfo.title }}</h1>
             <div class="vets_wrapper_main-info">
                 <div class="vets_wrapper_main-info_left">
-                    <h3 v-html="vetInfo.address"/>
-                    <h3 v-html="vetInfo.worktime"/>
-                    <h3 v-html="vetInfo.phone"/>
+                    <p v-html="vetInfo.address"/>
+                    <p v-html="vetInfo.worktime"/>
+                    <p v-html="vetInfo.phone"/>
                     <div>
-                        <h3 v-html="vetInfo.social"/>
+                        <p v-html="vetInfo.social"/>
                         <div class="vets_wrapper_main-info_left_social">
                             <template v-for="link in vetInfo.socialLinks">
                                 <div v-if="link.link" class="vets_wrapper_main-info_left_social_link">
@@ -23,8 +28,13 @@
                 </div>
                 <div class="vets_wrapper_main-info_map" v-html="vetInfo.map"/>
             </div>
+            <div class="vets_wrapper_info">
+                <h2>{{ vetInfo.infoTitle }}</h2>
+                <p>{{ vetInfo.infoContent }}</p>
+            </div>
             <div class="vets_wrapper_list">
-                <ToggleOpenList :elements="vetInfo.services" header-font-size="18px">
+                <h2>{{ vetInfo.servicesTitle }}</h2>
+                <ToggleOpenList :elements="vetInfo.servicesList" header-font-size="18px">
                     <template #content="{ elemContent }">
                         <table class="vets_wrapper_services">
                             <tbody>
@@ -42,7 +52,7 @@
                 <swiper
                     class="vets_wrapper_gallery_swiper"
                     :spaceBetween="30"
-                    :slidesPerView="isPC ? 2 : 1"
+                    :slidesPerView="isPC ? 3 : 2"
                     :autoplay="{
                         delay: 6000,
                         disableOnInteraction: false,
@@ -53,22 +63,25 @@
                     :navigation="true"
                 >
                     <swiper-slide v-for="(imageName, index) in vetInfo.photos" :key="index">
-                        <img class="vets_wrapper_gallery_swiper_image" :src="`/src/assets/vets/${imageName}`" alt="Image"/>
+                        <img class="vets_wrapper_gallery_swiper_image" :src="`/src/assets/vets/${imageName}`"
+                             alt="Image"/>
                     </swiper-slide>
                 </swiper>
             </div>
             <div class="vets_wrapper_doctors">
-                <h1>{{ vetInfo.doctors }}</h1>
+                <h2>{{ vetInfo.doctors }}</h2>
                 <div v-for="doctor in vetInfo.doctorsList" class="vets_wrapper_doctors_doctor">
                     <div class="vets_wrapper_doctors_doctor_left">
                         <h3>{{ doctor.name }}</h3>
                         <p>{{ doctor.info }}</p>
                     </div>
-                    <img class="vets_wrapper_doctors_doctor_photo" :src="`/src/assets/vets/${doctor.photo}`" alt="doctor-photo"/>
+                    <img class="vets_wrapper_doctors_doctor_photo" :src="`/src/assets/vets/${doctor.photo}`"
+                         alt="doctor-photo"/>
                 </div>
             </div>
         </div>
     </MainView>
+    <Footer/>
 </template>
 
 <script lang="ts">
@@ -79,12 +92,16 @@
     import { ref, watch } from 'vue'
     import MainView from '@/views/MainView.vue'
     import ToggleOpenList from '@/components/common/ToggleOpenList.vue'
+    import Footer from '@/components/Footer.vue'
+    import { useCommonDataStore } from '@/store/commonData'
 
     export default {
-        components: { ToggleOpenList, MainView, LeftNav },
+        components: { Footer, ToggleOpenList, MainView, LeftNav },
         setup () {
             const mainStore = useMainStore()
             const vetsStore = useVetClinicsStore()
+            const commonStore = useCommonDataStore()
+
             const route = useRoute()
             const vetId = route.params.id ?? '12'
             const images = ['/alice/center_banner.jpg', '/alice/left_banner.jpg', '/alice/right_banner.jpg', '/alice/right_banner.jpg']
@@ -94,9 +111,11 @@
             let vetInfo = ref(content.value.vets && content.value.vets.find(vet => {
                 return vet.id.toString() === vetId
             }))
+            let sectors = ref(commonStore.content[route.query.lang].sectors)
 
             watch(() => route.query.lang, () => {
                 content.value = vetsStore.content[route.query.lang]
+                sectors.value = commonStore.content[route.query.lang].sectors
             })
             watch(() => route.params.id, () => {
                 vetInfo.value = content.value.vets && content.value.vets.find(vet => {
@@ -104,12 +123,22 @@
                 })
             })
 
+            const getClinicsById = (id: string) => {
+                return content.value.vets.filter(clinic => {
+                    return clinic.sector.id === id
+                })
+            }
+
             // const blocksId = vetInfo.value.bankDetailsArr.map((elem) => elem.id)
 
             return {
+                mainStore,
                 content,
                 vetInfo,
-                isPC, images
+                isPC,
+                images,
+                sectors,
+                getClinicsById
             }
         }
     }
@@ -119,6 +148,13 @@
 .vets {
   display: flex;
   overflow-x: hidden;
+
+  &_nav {
+    display: flex;
+    flex-direction: column;
+    border-right: 3px solid gold;
+    height: 40vh;
+  }
 
   &_wrapper {
     margin-left: 20px;
@@ -132,7 +168,20 @@
       display: flex;
       justify-content: space-between;
 
+      @include mobileOrTablet {
+        display: block;
+      }
+
       &_left {
+        p {
+          font-weight: 400;
+
+          :deep(span) {
+            font-weight: 600;
+            color: $main-green;
+          }
+        }
+
         &_social {
           display: flex;
 
@@ -141,6 +190,10 @@
             height: 30px;
             margin-right: 15px;
           }
+        }
+
+        @include mobileOrTablet {
+          margin-bottom: 30px;
         }
       }
 
@@ -174,15 +227,17 @@
       &_cell {
         padding: 10px 0;
         border-bottom: 1px solid $main-green;
+        min-width: 80px;
       }
     }
 
     &_gallery {
-      height: 700px;
+      height: 400px;
       margin: 40px 0;
 
       &_swiper {
         height: 100%;
+
         :deep(*) {
           span {
             background: $main-green;
@@ -202,31 +257,47 @@
     &_doctors {
       margin: 20px 0;
 
-        &_doctor {
-          display: flex;
+      &_doctor {
+        display: flex;
+        @include mobileOrTablet {
+          display: block;
+        }
 
-          &_left {
-            margin-right: 50px;
-            width: calc(100% - 300px);
+        &_left {
+          margin-right: 50px;
+          width: calc(100% - 300px);
 
-            & p {
-              font-size: 16px;
-              line-height: 22px;
-            }
+          @include mobileOrTablet {
+            width: auto;
+            margin-right: 0;
           }
-          &_photo {
-            width: 250px !important;
-            height: 250px;
-            border-radius: 50%;
-            margin-right: 60px;
 
-            & img {
-              width: 100%;
-              height: 100%;
-              object-fit: contain;
-            }
+          & p {
+            font-size: 16px;
+            line-height: 22px;
           }
         }
+
+        &_photo {
+          width: 250px !important;
+          height: 250px;
+          border-radius: 50%;
+          margin-right: 60px;
+          display: flex;
+          justify-content: center;
+
+          @include mobileOrTablet {
+            border-radius: 4px;
+            margin: auto;
+          }
+
+          & img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
     }
   }
 }

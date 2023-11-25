@@ -42,7 +42,13 @@ export const routes = [
         component: VetClinicPage,
         query: {
             lang: 'rus'
-        }
+        },
+        children: [
+            {
+                path: ':id',
+                component: VetClinicPage,
+            }
+        ],
     },
 ]
 

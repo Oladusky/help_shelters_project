@@ -1,8 +1,8 @@
 <template>
-    <div class="left-nav">
+    <div class="left-nav" :class="{'left-nav_border': showBorder}">
         <router-link
             v-for="link in links"
-            :to="{ path: path ? `${ path }/${ link.id }` : `/shelters/${ link.id }`, query: {lang: mainStore.language} }"
+            :to="{ path: path ? `/vets/${ link.id }` : `/shelters/${ link.id }`, query: {lang: mainStore.language} }"
             class="left-nav_link"
             @click="$emit('clicked')"
         >
@@ -28,9 +28,10 @@
             path: {
                 type: String,
             },
-            nestedLinks: {
+            showBorder: {
                 type: Boolean,
-            }
+                default: true
+            },
         },
         setup () {
             const sheltersStore = useSheltersStore()
@@ -55,10 +56,13 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  border-right: 3px solid gold;
   width: max-content;
-  height: 40vh;
   padding-right: 45px;
+
+  &_border {
+    height: 40vh;
+    border-right: 3px solid gold;
+  }
 
   @include mobileOrTablet {
     border-right: none;

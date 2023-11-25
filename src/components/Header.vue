@@ -49,6 +49,12 @@
                         path="/shelters"
                         @clicked="showMobMenu = false"
                     />
+                    <div v-if="link.name === 'vets'"  class="header-mob_links_vets">
+                        <div v-for="sector in sectors" class="header-mob_links_vets_link">
+                            <p>{{ sector.name }}</p>
+                            <LeftNav v-if="getClinicsById(sector.id).length" :links="getClinicsById(sector.id)" path="vets" :show-border="false"/>
+                        </div>
+                    </div>
                 </template>
             </div>
             <div class="header-mob_langs">
@@ -74,6 +80,8 @@
     import { useSmallDataObjStore } from '@/store/smallDataObj'
     import LeftNav from '@/components/common/LeftNav.vue'
     import { useSheltersStore } from '@/store/shelters'
+    import { useVetClinicsStore } from '@/store/vetClinicsInfo'
+    import { useCommonDataStore } from '@/store/commonData'
 
     export default {
         components: { LeftNav, MainView },
@@ -81,6 +89,8 @@
             const mainStore = useMainStore()
             const smallDataStore = useSmallDataObjStore()
             const sheltersStore = useSheltersStore()
+            const vetsStore = useVetClinicsStore()
+            const commonStore = useCommonDataStore()
 
             const languages = ref<Language[]>(['en', 'rus', 'rom'])
             const router = useRouter()
@@ -90,14 +100,22 @@
             const lang = ref(route.query.lang)
             const links = ref('')
             let shelters = ref(sheltersStore.content[route.query.lang])
-            watch(() => route.query.lang, () => {
-                shelters.value = sheltersStore.content[route.query.lang]
-            })
+            let vetsList = ref(vetsStore.content[route.query.lang])
+            let sectors = ref(commonStore.content[route.query.lang]?.sectors)
 
             watch(() => route.query.lang, (newValue) => {
                 lang.value = newValue
                 links.value = smallDataStore.content[lang.value]
+                shelters.value = sheltersStore.content[route.query.lang]
+                vetsList.value = vetsStore.content[route.query.lang]
+                sectors.value = commonStore.content[route.query.lang]?.sectors
             })
+
+            const getClinicsById = (id: string) => {
+                return vetsList.value.vets.filter(clinic => {
+                    return clinic.sector.id === id
+                })
+            }
 
             function changeLanguage (lang: Language) {
                 mainStore.changeLanguage(lang)
@@ -115,7 +133,9 @@
                 route,
                 showMobMenu,
                 links,
-                shelters
+                shelters,
+                sectors,
+                getClinicsById
             }
         }
     }
@@ -216,6 +236,17 @@
 
     &_link {
       margin-bottom: 15px;
+    }
+
+    &_vets {
+      margin-left: 10px;
+      &_link {
+        p {
+          font-size: 14px;
+          color: $main-green;
+          margin-top: 0;
+        }
+      }
     }
   }
 
