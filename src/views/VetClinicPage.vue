@@ -103,13 +103,13 @@
             const commonStore = useCommonDataStore()
 
             const route = useRoute()
-            const vetId = ref(route.params.id ?? '12')
+            const vetId = route.params.id ?? '12'
             const images = ['/alice/center_banner.jpg', '/alice/left_banner.jpg', '/alice/right_banner.jpg', '/alice/right_banner.jpg']
 
             const isPC = ref(mainStore.isPC)
             let content = ref(vetsStore.content[route.query.lang])
-            let vetInfo = ref(content.value.vets && content.value.vets.filter(vet => {
-                return vet.id.toString() === vetId.value
+            let vetInfo = ref(content.value.vets && content.value.vets.find(vet => {
+                return vet.id.toString() === vetId
             }))
             let sectors = ref(commonStore.content[route.query.lang].sectors)
 
