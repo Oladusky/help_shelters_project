@@ -22,4 +22,7 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    outDir: 'dist', // Указывает на папку для собранных файлов
+  },
 })
