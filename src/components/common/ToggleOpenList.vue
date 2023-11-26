@@ -31,7 +31,7 @@
         setup (props) {
             const mainStore = useMainStore()
 
-            const blocksId = props.elements.map((elem) => elem.id)
+            // const blocksId = props.elements.map((elem) => elem.id)
             const openedBlocksId = ref(mainStore.isPC ? props.openedBlocksId || [] : [])
             const toggleOpenBlock = (id: number): void => {
                 if (isBlockOpened(id)) {

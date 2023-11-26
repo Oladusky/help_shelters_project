@@ -11,7 +11,7 @@ export const useSheltersStore = defineStore('shelters', {
                     shelters: [
                         {
                             id: 0,
-                            title: 'Приют AOVA',
+                            title: 'Приют',
                             img: 'center_banner.jpg',
                             text: 'This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion.',
                             textLarge: '<span>О приюте: </span>This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.',

@@ -46,13 +46,17 @@
                     <LeftNav 
                         v-if="link.name === 'shelters'" 
                         :links="shelters.shelters"
-                        path="/shelters"
                         @clicked="showMobMenu = false"
                     />
                     <div v-if="link.name === 'vets'"  class="header-mob_links_vets">
                         <div v-for="sector in sectors" class="header-mob_links_vets_link">
                             <p>{{ sector.name }}</p>
-                            <LeftNav v-if="getClinicsById(sector.id).length" :links="getClinicsById(sector.id)" path="vets" :show-border="false"/>
+                            <LeftNav v-if="getClinicsById(sector.id).length"
+                                     :links="getClinicsById(sector.id)"
+                                     path="vets"
+                                     :show-border="false"
+                                     @clicked="showMobMenu = false"
+                            />
                         </div>
                     </div>
                 </template>

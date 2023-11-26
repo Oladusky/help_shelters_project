@@ -92,7 +92,7 @@
             })
             watch(() => route.params.id, () => {
                 shelterInfo.value = content.value.shelters && content.value.shelters.find(shelter => {
-                    return shelter.id.toString() === shelterId
+                    return shelter.id.toString() === route.params.id
                 })
             })
 
