@@ -25,5 +25,6 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist', // Указывает на папку для собранных файлов
+    homepage: "https://github.com/shelters_page_deploy/"
   },
 })
