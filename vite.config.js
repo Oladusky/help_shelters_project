@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/help_shelters_project/' : '/',
+  base: '/help_shelters_project/',
   plugins: [
     vue(),
   ],
@@ -24,7 +24,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist', // Указывает на папку для собранных файлов
-    homepage: "https://github.com/shelters_page_deploy/"
+    // outDir: 'dist', // Указывает на папку для собранных файлов
+    // homepage: "https://github.com/shelters_page_deploy/"
   },
 })
