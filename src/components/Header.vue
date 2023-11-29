@@ -2,7 +2,7 @@
     <MainView>
         <header v-if="mainStore.isPC" class="header">
             <div class="header_logo">
-                <img src="../assets/icons8-pets-100.png" alt="Логотип"/>
+                <img src="/help_shelters_project/icons8-pets-100.png" alt="Логотип"/>
             </div>
             <div class="header_links">
                 <router-link v-for="link in routes" :to="{ name: link.name, query: {...route.query} }"
@@ -21,7 +21,7 @@
     <header v-if="mainStore.isMobileOrTablet" class="header-mob">
         <div class="header-mob_top">
             <div class="header-mob_logo">
-                <img src="../assets/icons8-pets-100.png" alt="Логотип"/>
+                <img src="/help_shelters_project/icons8-pets-100.png" alt="Логотип"/>
             </div>
             <div class="header-mob_burger">
                 <img v-if="!showMobMenu"

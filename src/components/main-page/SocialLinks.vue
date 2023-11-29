@@ -3,7 +3,7 @@
         <h2 class="social_title">{{ content.socialLinks.header }}</h2>
         <p class="social_text">{{ content.socialLinks.text }}</p>
         <div class="social_links">
-            <div class="social_links_icon"><img :src="`/src/assets/icons/facebook.svg`"/>Facebook:</div>
+            <div class="social_links_icon"><img :src="`/help_shelters_project/icons/facebook.svg`"/>Facebook:</div>
             <ul v-for="link in content.socialLinks.links.facebook" class="social_links_link">
                 <li class="social_links_link_description">
                     <a class="social_links_link_header" :href="link.link">{{link.name}}</a>

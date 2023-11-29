@@ -2,7 +2,7 @@
     <MainView class="cards">
         <div v-for="card in content.shelters" class="card">
             <div v-if="!showLarge" class="card_image">
-                <img :src="`/src/assets/shelters/${card.img}`"/>
+                <img :src="`/help_shelters_project/shelters/${card.img}`"/>
             </div>
             <div v-if="!showLarge" class="card_content">
                 <div class="card_content_title">{{ card.title }}</div>
@@ -11,7 +11,7 @@
                 </p>
             </div>
             <div v-if="showLarge" class="card_image">
-                <img :src="`/src/assets/shelters/${card.img}`"/>
+                <img :src="`/help_shelters_project/shelters/${card.img}`"/>
             </div>
             <div v-if="showLarge" class="card_content">
                 <div class="card_content_title">{{ content.info.title }}</div>
@@ -25,7 +25,7 @@
                     <template v-for="link in card.social">
                         <div v-if="link.link" class="card_social">
                             <router-link :to="link.link">
-                                <img :src="`/src/assets/icons/${ link.icon }`"/>
+                                <img :src="`/help_shelters_project/icons/${ link.icon }`"/>
                             </router-link>
                         </div>
                     </template>

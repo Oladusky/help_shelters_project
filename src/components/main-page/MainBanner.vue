@@ -20,7 +20,7 @@
                 class="main-block__swiper"
             >
                 <swiper-slide v-for="(imageName, index) in images" :key="index">
-                    <img :src="`src/assets/images/${imageName}`" alt="Image" class="main-block__swiper-image"/>
+                    <img :src="`/help_shelters_project/images/${imageName}`" alt="Image" class="main-block__swiper-image"/>
                 </swiper-slide>
             </swiper>
         </div>
