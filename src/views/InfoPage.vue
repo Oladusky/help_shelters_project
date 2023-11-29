@@ -4,7 +4,7 @@
             <h3 class="info-page_block_title" @click="toggleOpenBlock(infoBlock.id)">
                 {{ infoBlock.title }}
                 <img class="info-page_block_title_arrow"
-                     src="/help_shelters_project/icons/icon-arrow.svg"
+                     src="/icons/icon-arrow.svg"
                      alt="arrow-down"
                      :class="{ 'arrow-up': isBlockOpened(infoBlock.id) }"/>
             </h3>
