@@ -57,4 +57,12 @@ const router = createRouter({
     routes
 })
 
+router.beforeEach((to, from, next) => {
+    if (!to.query.lang) {
+        next({ path: to.path, query: { ...to.query, lang: 'rus' } })
+    } else {
+        next()
+    }
+})
+
 export default router
