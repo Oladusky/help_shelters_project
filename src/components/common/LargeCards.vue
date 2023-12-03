@@ -1,39 +1,46 @@
 <template>
-    <MainView class="cards">
-        <div v-for="card in content.shelters" class="card">
-            <div v-if="!showLarge" class="card_image">
-                <img :src="`/help_shelters_project/shelters/${card.img}`"/>
-            </div>
-            <div v-if="!showLarge" class="card_content">
-                <div class="card_content_title">{{ card.title }}</div>
-                <p class="card_content_text">
-                    {{ card.text }}
-                </p>
-            </div>
-            <div v-if="showLarge" class="card_image">
-                <img :src="`/help_shelters_project/shelters/${card.img}`"/>
-            </div>
-            <div v-if="showLarge" class="card_content">
-                <div class="card_content_title">{{ content.info.title }}</div>
-                <div class="card_content_subtitle">{{ content.info.amount }}</div>
-                <p class="card_content_text">
-                    {{ content.info.text }}
-                </p>
-            </div>
-            <div class="card_footer">
-                <div class="card_media">
-                    <template v-for="link in card.social">
-                        <div v-if="link.link" class="card_social">
-                            <router-link :to="link.link">
-                                <img :src="`/help_shelters_project/icons/${ link.icon }`"/>
-                            </router-link>
-                        </div>
-                    </template>
+    <MainView>
+        <h2>{{content.title}}</h2>
+        <div class="cards">
+            <div v-for="card in content.shelters" class="card">
+                <div v-if="!showLarge" class="card_image">
+                    <img :src="`/help_shelters_project/shelters/${card.img}`"/>
                 </div>
+                <div v-if="!showLarge" class="card_content">
+                    <div class="card_content_title">{{ card.title }}</div>
+                    <p class="card_content_text">
+                        {{ card.text }}
+                    </p>
+                </div>
+                <div v-if="showLarge" class="card_image">
+                    <img :src="`/help_shelters_project/shelters/${card.img}`"/>
+                </div>
+                <div v-if="showLarge" class="card_content">
+                    <div class="card_content_title">{{ content.info.title }}</div>
+                    <div class="card_content_subtitle">{{ content.info.amount }}</div>
+                    <p class="card_content_text">
+                        {{ content.info.text }}
+                    </p>
+                </div>
+                <div class="card_footer">
+                    <div class="card_media">
+                        <template v-for="link in card.social">
+                            <div v-if="link.link" class="card_social">
+                                <router-link :to="link.link">
+                                    <img :src="`/help_shelters_project/icons/${ link.icon }`"/>
+                                </router-link>
+                            </div>
+                        </template>
+                    </div>
 
-                <router-link :to="{ path: `shelters/${ card.id }`, query: {lang: mainStore.language} }"
-                             class="card_button">{{ content.buttons.more }}
-                </router-link>
+                    <router-link :to="{ path: `shelters/${ card.id }`, query: {lang: mainStore.language} }" class="card_button">
+                        {{ content.buttons.more }}
+                    </router-link>
+                    <div class="card_button" @click="toggleVolCard">
+                        {{ content.buttons.more }}
+                    </div>
+                </div>
+                <VolunteerCard v-if="volCardOpen" :volunteer-info="card" @close="toggleVolCard"/>
             </div>
         </div>
     </MainView>
@@ -42,12 +49,18 @@
 <script lang="ts">
     import { useMainStore } from '@/store/main'
     import { useRoute } from 'vue-router'
-    import { ref, watch } from 'vue'
+    import { PropType, ref, watch } from 'vue'
     import { useSheltersStore } from '@/store/shelters'
     import MainView from '@/views/MainView.vue'
+    import VolunteerCard from "@/components/common/VolunteerCard.vue";
 
     export default {
-        components: { MainView },
+        components: { MainView, VolunteerCard },
+        props: {
+            contentType: {
+                type: String as PropType<'shelters' | 'volunteers'>
+            }
+        },
         setup () {
             const sheltersStore = useSheltersStore()
             const mainStore = useMainStore()
@@ -57,10 +70,15 @@
             watch(() => route.query.lang, () => {
                 content.value = sheltersStore.content[route.query.lang]
             })
+
+            const volCardOpen = ref(false)
+            const toggleVolCard = () => volCardOpen.value = !volCardOpen.value
             return {
                 content,
                 mainStore,
                 showLarge,
+                volCardOpen,
+                toggleVolCard
             }
         }
     }

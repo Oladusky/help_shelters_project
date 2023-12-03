@@ -25,11 +25,11 @@
             </div>
             <div class="header-mob_burger">
                 <img v-if="!showMobMenu"
-                     src="../assets/icons8-menu-squared-50.png" alt="Логотип"
+                     src="/help_shelters_project/icons8-menu-squared-50.png" alt="Логотип"
                      @click="showMobMenu = true"
                 />
                 <img v-else
-                     src="../assets/icons8-cross-50.png" alt="Логотип"
+                     src="/help_shelters_project/icons8-cross-50.png" alt="Логотип"
                      @click="showMobMenu = false"
                 />
             </div>
