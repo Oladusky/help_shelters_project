@@ -1,7 +1,8 @@
 <template>
     <MainBanner/>
     <MainText/>
-    <LargeCards/>
+    <LargeCards :content-type="'shelters'"/>
+    <LargeCards :content-type="'volunteers'"/>
     <SocialLinks/>
     <Footer/>
 </template>

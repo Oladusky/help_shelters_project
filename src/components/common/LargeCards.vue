@@ -33,10 +33,10 @@
                         </template>
                     </div>
 
-                    <router-link :to="{ path: `shelters/${ card.id }`, query: {lang: mainStore.language} }" class="card_button">
+                    <router-link v-if="contentType === 'shelters'" :to="{ path: `shelters/${ card.id }`, query: {lang: mainStore.language} }" class="card_button">
                         {{ content.buttons.more }}
                     </router-link>
-                    <div class="card_button" @click="toggleVolCard">
+                    <div v-else class="card_button" @click="toggleVolCard">
                         {{ content.buttons.more }}
                     </div>
                 </div>
@@ -53,6 +53,7 @@
     import { useSheltersStore } from '@/store/shelters'
     import MainView from '@/views/MainView.vue'
     import VolunteerCard from "@/components/common/VolunteerCard.vue";
+    import {useVolunteersStore} from "@/store/volunteers";
 
     export default {
         components: { MainView, VolunteerCard },
@@ -61,14 +62,17 @@
                 type: String as PropType<'shelters' | 'volunteers'>
             }
         },
-        setup () {
+        setup (props) {
             const sheltersStore = useSheltersStore()
+            const volunteersStore = useVolunteersStore()
             const mainStore = useMainStore()
+
             const route = useRoute()
             const showLarge = ref(false)
-            let content = ref(sheltersStore.content[route.query.lang])
+
+            let content = props.contentType === 'shelters' ? (sheltersStore.content[route.query.lang]) : (volunteersStore.content[route.query.lang])
             watch(() => route.query.lang, () => {
-                content.value = sheltersStore.content[route.query.lang]
+                content.value = props.contentType === 'shelters' ? (sheltersStore.content[route.query.lang]) : (volunteersStore.content[route.query.lang])
             })
 
             const volCardOpen = ref(false)
@@ -183,6 +187,8 @@
     z-index: 1;
     width: 50%;
     text-align: center;
+    cursor: pointer;
+
     @include mobile {
       font-size: 10px;
     }
