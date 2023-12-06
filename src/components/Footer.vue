@@ -1,5 +1,5 @@
 <template>
-    <MainView class="footer">
+    <MainView v-if="content" class="footer">
         <p class="footer_text">{{ content.footer.line_one }}</p>
         <p class="footer_text">{{ content.footer.line_two }}</p>
     </MainView>

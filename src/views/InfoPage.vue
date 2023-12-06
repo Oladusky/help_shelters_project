@@ -1,5 +1,5 @@
 <template>
-    <MainView class="info-page">
+    <MainView v-if="content" class="info-page">
         <div v-for="infoBlock in content" class="info-page_block">
             <h3 class="info-page_block_title" @click="toggleOpenBlock(infoBlock.id)">
                 {{ infoBlock.title }}

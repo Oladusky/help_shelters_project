@@ -5,10 +5,8 @@ export const useInfoStore = defineStore('info', {
         return {
             content: {
                 rus: {},
-                rom: {
-                },
-                en: {
-                }
+                rom: {},
+                en: {}
             },
         }
     },

@@ -16,12 +16,7 @@ export const useSmallDataObjStore = defineStore('smallDataObj', {
                     shelters: 'Shelters',
                     vets: 'Vet\'s'
                 },
-                rom: {
-                    home: 'H',
-                    info: 'How to help',
-                    shelters: 'Shelters',
-                    vets: 'Vet\'s'
-                },
+                rom: {},
             }
         }
     },

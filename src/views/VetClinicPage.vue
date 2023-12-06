@@ -1,5 +1,5 @@
 <template>
-    <MainView class="vets">
+    <MainView v-if="vetInfo" class="vets">
         <div v-if="isPC" class="vets_nav">
             <div v-for="sector in sectors" class="vets_nav_link">
                 {{ sector.name }}

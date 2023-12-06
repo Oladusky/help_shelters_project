@@ -1,5 +1,5 @@
 <template>
-    <div class="left-nav" :class="{'left-nav_border': showBorder}">
+    <div v-if="links" class="left-nav" :class="{'left-nav_border': showBorder}">
         <router-link
             v-for="link in links"
             :to="{ path: path ? `/vets/${ link.id }` : `/shelters/${ link.id }`, query: {lang: mainStore.language} }"

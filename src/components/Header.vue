@@ -1,5 +1,5 @@
 <template>
-    <MainView>
+    <MainView v-if="routes">
         <header v-if="mainStore.isPC" class="header">
             <div class="header_logo">
                 <img src="/icons8-pets-100.png" alt="Логотип"/>
@@ -18,7 +18,7 @@
             </div>
         </header>
     </MainView>
-    <header v-if="mainStore.isMobileOrTablet" class="header-mob">
+    <header v-if="mainStore.isMobileOrTablet && routes" class="header-mob">
         <div class="header-mob_top">
             <div class="header-mob_logo">
                 <img src="/icons8-pets-100.png" alt="Логотип"/>
@@ -44,7 +44,7 @@
                         {{ links[link.name] }}
                     </router-link>
                     <LeftNav 
-                        v-if="link.name === 'shelters'" 
+                        v-if="link.name === 'shelters' && shelters"
                         :links="shelters.shelters"
                         @clicked="showMobMenu = false"
                     />

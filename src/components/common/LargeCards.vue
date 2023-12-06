@@ -1,5 +1,5 @@
 <template>
-    <MainView>
+    <MainView v-if="content">
         <h2>{{content.title}}</h2>
         <div class="cards">
             <div v-for="card in content.shelters" class="card">

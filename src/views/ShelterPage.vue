@@ -1,5 +1,5 @@
 <template>
-    <MainView class="shelters">
+    <MainView v-if="content" class="shelters">
         <LeftNav v-if="isPC" :links="content.shelters"/>
         <div class="shelters_shelter">
             <div class="shelters_shelter_header">

@@ -1,9 +1,9 @@
 <template>
-    <div v-for="elem in elements" class="toggle-list">
+    <div v-if="elements" v-for="elem in elements" class="toggle-list">
         <div class="toggle-list_title">
             <div class="toggle-list_name" :style="{'font-size': headerFontSize}" @click="toggleOpenBlock(elem.id)" v-html="elem.header"/>
             <img class="toggle-list_arrow"
-                 src="../../assets/icons/icon-arrow.svg"
+                 src="/icons/icon-arrow.svg"
                  alt="arrow-down"
                  :class="{ 'arrow-up': isBlockOpened(elem.id) }"/>
         </div>

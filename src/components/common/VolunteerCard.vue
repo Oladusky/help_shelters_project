@@ -1,5 +1,5 @@
 <template>
-    <Teleport to="body">
+    <Teleport v-if="volunteerInfo" to="body">
         <div class="wrapper">
             <div class="volunteer">
                 <div class="volunteer_header">
