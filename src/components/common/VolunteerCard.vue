@@ -5,7 +5,7 @@
                 <div class="volunteer_header">
                     <h3>{{ volunteerInfo.title }}</h3>
                     <img
-                        src="/help_shelters_project/icons8-cross-50.png" alt="Логотип"
+                        :src="`/help_shelters_project/icons8-cross-50.png`" alt="Логотип"
                         @click="$emit('close')"
                     />
                 </div>
